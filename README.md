@@ -1,7 +1,7 @@
 # Windows Registry Write Blocker
 
 ## Disclaimer
-This software has been tested to work on a Windows 10 Home laptop with a [Kingston DataTraveller G4 32GB USB](https://www.amazon.co.uk/Kingston-DTIG4-32GB-Traveler-Flash/dp/B00G9WHN12/), and an [Inatek 2.5" USB Caddy](https://www.amazon.co.uk/Optimized-Inateck-3-0-Portable-2-5-SATA-I-Additional/dp/B00KW4T69A/). As Windows is constantly changing, it is highly important that you test this before use on any potential digital evidence. There are no express guarantees or warranties, both suggested or implied with this software.
+This software has been tested to work on a Windows 10 Home laptop with a [Kingston DataTraveller G4 32GB USB](https://www.amazon.co.uk/Kingston-DTIG4-32GB-Traveler-Flash/dp/B00G9WHN12/), ~~and an [Inatek 2.5" USB Caddy](https://www.amazon.co.uk/Optimized-Inateck-3-0-Portable-2-5-SATA-I-Additional/dp/B00KW4T69A/)~~ Further testing required. As Windows is constantly changing, it is highly important that you test this before use on any potential digital evidence. There are no express guarantees or warranties, both suggested or implied with this software.
 
 ## Installation
 Download the latest version from the [Releases tab](https://github.com/Stormy102/WindowsRegistryWriteBlocker/releases). Alternatively you can download the repository and compile it from source with Visual Studio 2019. Please not that the program requires Administrative privileges to run due to the modification of HKLM registry keys.
