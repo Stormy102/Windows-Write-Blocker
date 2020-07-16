@@ -9,7 +9,6 @@ using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
-using System.Text;
 using System.Threading;
 using Microsoft.Win32;
 
@@ -23,8 +22,8 @@ namespace WindowsRegistryWriteBlocker
             {
                 using (RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SYSTEM\CurrentControlSet\Control\StorageDevicePolicies", RegistryKeyPermissionCheck.ReadWriteSubTree))
                 {
-                    int writeProtect = (int)key.GetValue("WriteProtect");
-                    if (writeProtect == 0)
+                    object writeProtect = key.GetValue("WriteProtect");
+                    if (writeProtect == null || (int)writeProtect == 0)
                     {
                         return false;
                     }
@@ -35,7 +34,7 @@ namespace WindowsRegistryWriteBlocker
 
         static void Main(string[] args)
         {
-            Console.Title = "Windows Write Blocker";
+            Console.Title = "Windows Write Blocker (v.0.2)";
 
             if (!CheckRequirements())
             {
@@ -64,15 +63,24 @@ namespace WindowsRegistryWriteBlocker
 
             Console.WriteLine();
 
-            if (args.Length > 1)
+            if (args.Length > 0)
             {
-                if (args[1].ToLower() == "--enable")
+                if (args[0].ToLower() == "--enable" || args[0].ToLower() == "-e")
                 {
                     SetWriteBlock(true);
                 }
-                if (args[1].ToLower() == "--disable")
+                if (args[0].ToLower() == "--disable" || args[0].ToLower() == "-d")
                 {
                     SetWriteBlock(false);
+                }
+                if (args[0].ToLower() == "--help" || args[0].ToLower() == "-h")
+                {
+                    Console.WriteLine("Command Line Option     | Description");
+                    Console.WriteLine("========================|===========================");
+                    Console.WriteLine(" -h, --help\t\t| Show the help dialog");
+                    Console.WriteLine(" -e, --enable\t\t| Enable the write blocker");
+                    Console.WriteLine(" -d, --disable\t\t| Disable the write blocker");
+                    return;
                 }
             }
 
@@ -177,7 +185,6 @@ namespace WindowsRegistryWriteBlocker
             // Sleep to allow OS handles to update registry keys 
             Thread.Sleep(3000);
 
-            Console.WriteLine();
             if (enable)
             {
                 Console.WriteLine("Write blocking has been enabled");
